@@ -1,22 +1,22 @@
-# Use the official Python image
+# Using whatever image u need
 FROM python:3.9-slim
 
-# Set environment variables
+
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set working directory
+# This is the working directory
 WORKDIR /app
 
-# Copy all project files to the container
+# This will copy all the project files to the container
 COPY . /app/
 
-# Install dependencies
+# For installing dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Expose port (Flask default)
+# Default port for flask
 EXPOSE 5000
 
-# Run the app
+# For running the app
 CMD ["python", "app.py"]
