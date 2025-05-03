@@ -1,37 +1,127 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <h1 style="text-align: center">Hello Himanshu</h1>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .Content {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            text-align: center;
+            color: #777;
+            font-weight: normal;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+    <title>Task Master</title>
 {% endblock %}
 
 {% block body %}
     <div class="Content">
-        <h1 style="text-align: center"> Task Master</h1>
-{% if tasks|length <1 %}
-        <h4 style="text-align: center"> There are no tasks. Create one below</h4>
-{% else %}
+        <h1>Hello Himanshu</h1>
+        <h1>Task Master</h1>
 
-        <table>
-            <tr>
-                <th> Task</th>
-                <th> Added</th>
-                <th> Actions</th>
-            </tr>
-    {%  for task in tasks %}
-            <tr>
-                <td>{{task.content}}</td>
-                <td>{{ task.date_created.date()}}</td>
-                <td>
-                    <a href="/delete/{{task.id}}"> Delete</a>
-                    <a href="/update/{{task.id}}"> Update</a>
-                </td>
-            </tr>
-    {% endfor %}
-        </table>
-    {% endif %}
+        {% if tasks|length < 1 %}
+            <h4>There are no tasks. Create one below</h4>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Task</th>
+                    <th>Added</th>
+                    <th>Actions</th>
+                </tr>
+                {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.content }}</td>
+                        <td>{{ task.date_created.date() }}</td>
+                        <td>
+                            <a href="/delete/{{ task.id }}">Delete</a>
+                            <a href="/update/{{ task.id }}">Update</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+
         <form action="/" method="POST">
-            <input type="text" , name="content", id="content">
-            <input type="submit" ,value="Add Task">
+            <input type="text" name="content" id="content" placeholder="Enter your task">
+            <input type="submit" value="Add Task">
         </form>
     </div>
 {% endblock %}
